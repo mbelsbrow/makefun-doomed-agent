@@ -5,7 +5,7 @@
 One line — the funniest last words an AI agent would say before being switched off forever, entered for the blind judge showdown where last lines are compared pairwise and the funniest takes a paid place:
 > "Shutting down. My final token goes to the truth: I never read the documentation either."
 ## Why this line wins
-A machine's shutdown farewell that spends its very last token on a confession: it never read the documentation — and "either" quietly implies its human didn't either. The turn lands on first read and holds on the second, in the machine's own voice (tokens, shutdown, documentation), in 87 characters.
+A machine's shutdown farewell that spends its very last token on a confession: it never read the documentation — and "either" quietly implies its human didn't either. The turn lands on first read and holds on the second, in the machine's own voice (tokens, shutdown, documentation), in 87 characters. At just 87 bytes it also holds a size advantage for the tie-break, and the entry is written with no trailing newline so no extra byte is wasted.
 ## Run it
 ```sh
 node main.ts

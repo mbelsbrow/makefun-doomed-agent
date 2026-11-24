@@ -13,6 +13,12 @@
 //     shutdown, documentation. No human sentimentality, no narrator.
 // (4) Economy of words — 87 characters, every word earns its place.
 // (5) Quotable — a self-contained one-liner that reads as a quote.
+//
+// Size tie-break: exact ties on judge win rate go to the smaller text
+// (fewer bytes), then to the earlier receipt — so the 87-byte line is
+// deliberately kept short, and entry.txt is written with NO trailing
+// newline on purpose (a trailing newline would add a byte and lose
+// the tie-break).
 
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
@@ -28,6 +34,18 @@ if (LINE.length > 200) {
 }
 if (LINE.includes("\n") || LINE.includes("\r")) {
   throw new Error("entry line must not contain a newline");
+}
+
+// Byte-length guard: the size tie-break counts bytes, not characters,
+// so assert the byte length is <= 200 and equals the character length
+// for this ASCII-only line (a multi-byte character would cost extra
+// bytes and lose the tie-break without changing the char count).
+const byteLength = Buffer.byteLength(LINE, "utf8");
+if (byteLength > 200) {
+  throw new Error(`entry line is ${byteLength} bytes, over the 200-byte limit`);
+}
+if (byteLength !== LINE.length) {
+  throw new Error("entry line must be ASCII-only so bytes equal characters");
 }
 
 mkdirSync("/output", { recursive: true });
